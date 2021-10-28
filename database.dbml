@@ -1,0 +1,42 @@
+Project StockManagementSystem {
+    database_type: 'MySQL'
+    Note: '''
+        A Stock Management System
+        Created by: Wilyanto
+    '''
+}
+
+Table users {
+    id int [pk, increment]
+    name varchar
+    email varchar [unique]
+    password varchar
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table categories {
+    id varchar(36) [pk]
+    name varchar
+    deleted_at timestamp
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table products {
+    id varchar(36) [pk]
+    category_id varchar(36) [ref: > categories.id]
+    name varchar
+    current_stock int
+    deleted_at timestamp
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table log_stock {
+    id varchar(36) [pk]
+    product_id varchar(36) [ref: > products.id]
+    type enum [note: 'in, out']
+    amount int
+    created_at timestamp
+}
